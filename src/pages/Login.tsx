@@ -13,6 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loginType, setLoginType] = useState<'student' | 'teacher'>('student');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Forgot Password States
   const [showForgotModal, setShowForgotModal] = useState(false);
@@ -27,7 +28,10 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    
     unlockAudio(); // Unlock audio context synchronously with user click
+    setIsSubmitting(true);
     try {
       // Send the selected loginType as 'role' to ensure it matches the database
       const { data } = await axios.post('https://rk-world.onrender.com/api/auth/login', { email, password, role: loginType });
@@ -39,6 +43,8 @@ const Login = () => {
       navigate('/');
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Login failed');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -208,9 +214,12 @@ const Login = () => {
         
         <button 
           type="submit" 
-          className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] hover:from-[#7C3AED] hover:to-[#6D28D9] text-white font-bold py-4 rounded-2xl shadow-lg shadow-[#8B5CF6]/30 transition-all hover:-translate-y-0.5 text-base mt-2 flex justify-center items-center gap-2"
+          disabled={isSubmitting}
+          className={`w-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] hover:from-[#7C3AED] hover:to-[#6D28D9] text-white font-bold py-4 rounded-2xl shadow-lg shadow-[#8B5CF6]/30 transition-all hover:-translate-y-0.5 text-base mt-2 flex justify-center items-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
         >
-          Login {isMobile && <span>→</span>}
+          {isSubmitting ? 'Logging in...' : (
+            <>Login {isMobile && <span>→</span>}</>
+          )}
         </button>
       </form>
 

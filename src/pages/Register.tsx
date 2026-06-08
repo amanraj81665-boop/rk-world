@@ -9,12 +9,16 @@ const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    
     unlockAudio(); // Unlock audio on user interaction
+    setIsSubmitting(true);
     try {
       const { data } = await axios.post('https://rk-world.onrender.com/api/auth/register', { name, email, password });
       login(data);
@@ -25,6 +29,8 @@ const Register = () => {
       navigate('/');
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Registration failed');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -76,9 +82,10 @@ const Register = () => {
           </div>
           <button 
             type="submit" 
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold py-3.5 rounded-xl shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all hover:scale-[1.02] mt-2"
+            disabled={isSubmitting}
+            className={`w-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] hover:from-[#7C3AED] hover:to-[#6D28D9] text-white font-bold py-4 rounded-2xl shadow-lg shadow-[#8B5CF6]/30 transition-all hover:-translate-y-0.5 text-base mt-2 flex justify-center items-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
           >
-            Sign Up
+            {isSubmitting ? 'Creating account...' : 'Create Account'}
           </button>
         </form>
 
