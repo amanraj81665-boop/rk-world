@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
-const socket = io('http://localhost:5001'); // Changed port to 5001 to match backend
+const socket = io('https://rk-world.onrender.com'); // Changed port to 5001 to match backend
 
 const CommunityChat = () => {
   const { user } = useAuth();
@@ -23,7 +23,7 @@ const CommunityChat = () => {
       try {
         const userInfoStr = localStorage.getItem('userInfo');
         const token = userInfoStr ? JSON.parse(userInfoStr).token : '';
-        const res = await axios.get('http://localhost:5001/api/chat', {
+        const res = await axios.get('https://rk-world.onrender.com/api/chat', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setMessages(res.data);

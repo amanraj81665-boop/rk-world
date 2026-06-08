@@ -21,7 +21,7 @@ const MockTest = () => {
       try {
         const userInfoStr = localStorage.getItem('userInfo');
         const token = userInfoStr ? JSON.parse(userInfoStr).token : '';
-        const { data } = await axios.get('http://localhost:5001/api/tests', {
+        const { data } = await axios.get('https://rk-world.onrender.com/api/tests', {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (data && data.length > 0) {
@@ -108,7 +108,7 @@ const MockTest = () => {
     try {
       const userInfoStr = localStorage.getItem('userInfo');
       const token = userInfoStr ? JSON.parse(userInfoStr).token : '';
-      const { data } = await axios.post(`http://localhost:5001/api/tests/${testData._id}/submit`, { answers }, {
+      const { data } = await axios.post(`https://rk-world.onrender.com/api/tests/${testData._id}/submit`, { answers }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setResult(data);

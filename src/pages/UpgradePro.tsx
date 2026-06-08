@@ -21,7 +21,7 @@ const UpgradePro = () => {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const res = await axios.get('http://localhost:5001/api/settings');
+        const res = await axios.get('https://rk-world.onrender.com/api/settings');
         if (res.data && res.data.proSubscriptionPrice) {
           setPrice(res.data.proSubscriptionPrice);
         }
@@ -39,7 +39,7 @@ const UpgradePro = () => {
       const token = userInfoStr ? JSON.parse(userInfoStr).token : '';
 
       // 1. Create Order on Backend
-      const { data } = await axios.post('http://localhost:5001/api/payment/orders', {}, {
+      const { data } = await axios.post('https://rk-world.onrender.com/api/payment/orders', {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -50,7 +50,7 @@ const UpgradePro = () => {
         
         setTimeout(async () => {
           try {
-            const verifyRes = await axios.post('http://localhost:5001/api/payment/verify', {
+            const verifyRes = await axios.post('https://rk-world.onrender.com/api/payment/verify', {
               mock: true
             }, {
               headers: { Authorization: `Bearer ${token}` }
@@ -84,7 +84,7 @@ const UpgradePro = () => {
         handler: async function (response: any) {
           try {
             // 3. Verify Payment
-            const verifyRes = await axios.post('http://localhost:5001/api/payment/verify', {
+            const verifyRes = await axios.post('https://rk-world.onrender.com/api/payment/verify', {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,

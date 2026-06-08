@@ -19,7 +19,7 @@ const Courses = () => {
         const token = userInfo?.token;
 
         // Fetch enrolled courses from the dashboard API
-        const { data } = await axios.get('http://localhost:5001/api/dashboard', {
+        const { data } = await axios.get('https://rk-world.onrender.com/api/dashboard', {
           headers: { Authorization: `Bearer ${token}` }
         });
 

@@ -16,7 +16,7 @@ const Register = () => {
     e.preventDefault();
     unlockAudio(); // Unlock audio on user interaction
     try {
-      const { data } = await axios.post('http://localhost:5001/api/auth/register', { name, email, password });
+      const { data } = await axios.post('https://rk-world.onrender.com/api/auth/register', { name, email, password });
       login(data);
       toast.success('Registration Successful!');
 

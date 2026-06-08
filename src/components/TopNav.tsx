@@ -21,7 +21,7 @@ const TopNav = ({ onMenuClick }: TopNavProps) => {
         const userInfoStr = localStorage.getItem('userInfo');
         const token = userInfoStr ? JSON.parse(userInfoStr).token : '';
         if (!token) return;
-        const res = await axios.get('http://localhost:5001/api/notifications', {
+        const res = await axios.get('https://rk-world.onrender.com/api/notifications', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setNotifications(res.data);
@@ -31,7 +31,7 @@ const TopNav = ({ onMenuClick }: TopNavProps) => {
     };
     fetchNotifications();
 
-    const socket = io('http://localhost:5001');
+    const socket = io('https://rk-world.onrender.com');
     socket.on('new-notification', (notification) => {
       setNotifications(prev => [notification, ...prev]);
       toast('New Alert: ' + notification.title, { icon: '🔔' });
@@ -47,7 +47,7 @@ const TopNav = ({ onMenuClick }: TopNavProps) => {
     try {
       const userInfoStr = localStorage.getItem('userInfo');
       const token = userInfoStr ? JSON.parse(userInfoStr).token : '';
-      await axios.put(`http://localhost:5001/api/notifications/${id}/read`, {}, {
+      await axios.put(`https://rk-world.onrender.com/api/notifications/${id}/read`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setNotifications(prev => prev.map(n => n._id === id ? { ...n, isRead: true } : n));

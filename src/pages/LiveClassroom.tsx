@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
 // Connect to local Node.js backend
-const SOCKET_URL = 'http://localhost:5001';
+const SOCKET_URL = 'https://rk-world.onrender.com';
 
 type ChatMessage = {
   id: number;
@@ -36,7 +36,7 @@ const LiveClassroom = () => {
     // Fetch initial data
     const fetchLiveData = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5001/api/live');
+        const { data } = await axios.get('https://rk-world.onrender.com/api/live');
         setLiveData(data);
         if (data && data.chatMessages) {
           setChatMessages(data.chatMessages);

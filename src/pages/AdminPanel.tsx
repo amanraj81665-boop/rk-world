@@ -31,7 +31,7 @@ const AdminPanel = () => {
     setSuccess('');
     try {
       const token = JSON.parse(localStorage.getItem('userInfo') || '{}').token;
-      await axios.post('http://localhost:5001/api/library', libForm, {
+      await axios.post('https://rk-world.onrender.com/api/library', libForm, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSuccess('Library material uploaded successfully!');
@@ -49,7 +49,7 @@ const AdminPanel = () => {
     setSuccess('');
     try {
       const token = JSON.parse(localStorage.getItem('userInfo') || '{}').token;
-      await axios.post('http://localhost:5001/api/courses', courseForm, {
+      await axios.post('https://rk-world.onrender.com/api/courses', courseForm, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSuccess('Course created successfully!');
@@ -70,7 +70,7 @@ const AdminPanel = () => {
       const options = [testForm.optionA, testForm.optionB, testForm.optionC, testForm.optionD];
       const html = `<p class="font-medium">${testForm.questionHtml}</p>`;
       
-      await axios.post('http://localhost:5001/api/tests', {
+      await axios.post('https://rk-world.onrender.com/api/tests', {
         examName: testForm.examName,
         questionHtml: html,
         options: options
@@ -92,7 +92,7 @@ const AdminPanel = () => {
     setSuccess('');
     try {
       const token = JSON.parse(localStorage.getItem('userInfo') || '{}').token;
-      await axios.post('http://localhost:5001/api/admin/staff', staffForm, {
+      await axios.post('https://rk-world.onrender.com/api/admin/staff', staffForm, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSuccess(`${staffForm.role === 'admin' ? 'Admin' : 'Teacher'} account created successfully!`);

@@ -13,7 +13,7 @@ const Analytics = () => {
         const userInfo = userInfoStr ? JSON.parse(userInfoStr) : null;
         const token = userInfo?.token;
 
-        const res = await axios.get('http://localhost:5001/api/analytics', {
+        const res = await axios.get('https://rk-world.onrender.com/api/analytics', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setData(res.data);

@@ -13,7 +13,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5001/api/profile');
+        const { data } = await axios.get('https://rk-world.onrender.com/api/profile');
         setProfile(data);
         setLoading(false);
       } catch (error) {
@@ -39,7 +39,7 @@ const Profile = () => {
         setUploadingImage(true);
         const base64String = reader.result as string;
         
-        const { data } = await axios.put('http://localhost:5001/api/profile/image', {
+        const { data } = await axios.put('https://rk-world.onrender.com/api/profile/image', {
           profileImage: base64String
         });
         

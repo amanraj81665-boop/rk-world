@@ -30,7 +30,7 @@ const Login = () => {
     unlockAudio(); // Unlock audio context synchronously with user click
     try {
       // Send the selected loginType as 'role' to ensure it matches the database
-      const { data } = await axios.post('http://localhost:5001/api/auth/login', { email, password, role: loginType });
+      const { data } = await axios.post('https://rk-world.onrender.com/api/auth/login', { email, password, role: loginType });
       login(data);
       toast.success('Login Successful!');
       
@@ -64,7 +64,7 @@ const Login = () => {
     if (!forgotEmail) return toast.error('Please enter your email');
     try {
       setIsForgotLoading(true);
-      const { data } = await axios.post('http://localhost:5001/api/auth/forgot-password', { email: forgotEmail });
+      const { data } = await axios.post('https://rk-world.onrender.com/api/auth/forgot-password', { email: forgotEmail });
       toast.success(data.message || 'OTP sent successfully!');
       setForgotStep(2);
     } catch (error: any) {
@@ -78,7 +78,7 @@ const Login = () => {
     if (!forgotOtp) return toast.error('Please enter the OTP');
     try {
       setIsForgotLoading(true);
-      const { data } = await axios.post('http://localhost:5001/api/auth/verify-otp', { email: forgotEmail, otp: forgotOtp });
+      const { data } = await axios.post('https://rk-world.onrender.com/api/auth/verify-otp', { email: forgotEmail, otp: forgotOtp });
       toast.success(data.message || 'OTP verified!');
       setForgotStep(3);
     } catch (error: any) {
@@ -92,7 +92,7 @@ const Login = () => {
     if (!newPassword || newPassword.length < 6) return toast.error('Password must be at least 6 characters');
     try {
       setIsForgotLoading(true);
-      const { data } = await axios.post('http://localhost:5001/api/auth/reset-password', { email: forgotEmail, otp: forgotOtp, newPassword });
+      const { data } = await axios.post('https://rk-world.onrender.com/api/auth/reset-password', { email: forgotEmail, otp: forgotOtp, newPassword });
       toast.success(data.message || 'Password reset successfully! Please login.');
       setShowForgotModal(false);
       setForgotStep(1);

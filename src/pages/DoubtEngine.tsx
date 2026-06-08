@@ -79,7 +79,7 @@ const DoubtEngine = () => {
 
     try {
       // Send to backend solve endpoint
-      const response = await axios.post('http://localhost:5001/api/doubts/solve', {
+      const response = await axios.post('https://rk-world.onrender.com/api/doubts/solve', {
         text: userMessage.text,
         imageBase64: userMessage.image
       });

@@ -36,7 +36,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const res = await axios.get('http://localhost:5001/api/settings');
+        const res = await axios.get('https://rk-world.onrender.com/api/settings');
         if (res.data) {
           setSettingsForm({ proSubscriptionPrice: res.data.proSubscriptionPrice });
         }
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
 
   const fetchCourses = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5001/api/courses');
+      const { data } = await axios.get('https://rk-world.onrender.com/api/courses');
       setCourses(data);
     } catch (error) {
       console.error('Error fetching courses', error);
@@ -89,7 +89,7 @@ const AdminDashboard = () => {
     try {
       const userInfoStr = localStorage.getItem('userInfo');
       const token = userInfoStr ? JSON.parse(userInfoStr).token : '';
-      await axios.post('http://localhost:5001/api/admin/courses', {
+      await axios.post('https://rk-world.onrender.com/api/admin/courses', {
         title: courseForm.title,
         module: courseForm.module,
         teacher: courseForm.teacher,
@@ -111,7 +111,7 @@ const AdminDashboard = () => {
     try {
       const userInfoStr = localStorage.getItem('userInfo');
       const token = userInfoStr ? JSON.parse(userInfoStr).token : '';
-      await axios.post('http://localhost:5001/api/admin/library', {
+      await axios.post('https://rk-world.onrender.com/api/admin/library', {
         ...libraryForm,
         downloads: 0,
         rating: 5.0
@@ -133,7 +133,7 @@ const AdminDashboard = () => {
       const options = [testForm.optionA, testForm.optionB, testForm.optionC, testForm.optionD];
       const html = `<p class="font-medium">${testForm.questionHtml}</p>`;
       
-      await axios.post('http://localhost:5001/api/admin/tests', {
+      await axios.post('https://rk-world.onrender.com/api/admin/tests', {
         examName: testForm.examName,
         questionHtml: html,
         options: options
@@ -152,7 +152,7 @@ const AdminDashboard = () => {
     try {
       const userInfoStr = localStorage.getItem('userInfo');
       const token = userInfoStr ? JSON.parse(userInfoStr).token : '';
-      await axios.post('http://localhost:5001/api/admin/live', liveForm, {
+      await axios.post('https://rk-world.onrender.com/api/admin/live', liveForm, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('Live class started successfully!');
@@ -167,7 +167,7 @@ const AdminDashboard = () => {
     try {
       const userInfoStr = localStorage.getItem('userInfo');
       const token = userInfoStr ? JSON.parse(userInfoStr).token : '';
-      await axios.post('http://localhost:5001/api/admin/staff', staffForm, {
+      await axios.post('https://rk-world.onrender.com/api/admin/staff', staffForm, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success(`${staffForm.role === 'admin' ? 'Admin' : 'Teacher'} account created successfully!`);
@@ -182,7 +182,7 @@ const AdminDashboard = () => {
     try {
       const userInfoStr = localStorage.getItem('userInfo');
       const token = userInfoStr ? JSON.parse(userInfoStr).token : '';
-      await axios.put('http://localhost:5001/api/settings', settingsForm, {
+      await axios.put('https://rk-world.onrender.com/api/settings', settingsForm, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('Pricing updated successfully!');
@@ -196,7 +196,7 @@ const AdminDashboard = () => {
     try {
       const userInfoStr = localStorage.getItem('userInfo');
       const token = userInfoStr ? JSON.parse(userInfoStr).token : '';
-      await axios.delete(`http://localhost:5001/api/admin/courses/${id}`, {
+      await axios.delete(`https://rk-world.onrender.com/api/admin/courses/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('Course deleted');
@@ -210,7 +210,7 @@ const AdminDashboard = () => {
     try {
       const userInfoStr = localStorage.getItem('userInfo');
       const token = userInfoStr ? JSON.parse(userInfoStr).token : '';
-      await axios.put(`http://localhost:5001/api/admin/courses/${id}`, { price: newPrice }, {
+      await axios.put(`https://rk-world.onrender.com/api/admin/courses/${id}`, { price: newPrice }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('Course price updated');

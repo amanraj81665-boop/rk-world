@@ -11,7 +11,7 @@ const Library = () => {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5001/api/library');
+        const { data } = await axios.get('https://rk-world.onrender.com/api/library');
         setMaterials(data);
         setLoading(false);
       } catch (error) {

@@ -27,7 +27,7 @@ const Dashboard = () => {
         const userInfo = userInfoStr ? JSON.parse(userInfoStr) : null;
         const config = userInfo ? { headers: { Authorization: `Bearer ${userInfo.token}` } } : {};
         
-        const response = await axios.get('http://localhost:5001/api/dashboard', config);
+        const response = await axios.get('https://rk-world.onrender.com/api/dashboard', config);
         setData(response.data);
         setLoading(false);
       } catch (error) {
@@ -57,7 +57,7 @@ const Dashboard = () => {
       }
       
       const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-      await axios.post(`http://localhost:5001/api/courses/${courseId}/enroll`, {}, config);
+      await axios.post(`https://rk-world.onrender.com/api/courses/${courseId}/enroll`, {}, config);
       
       toast.success('Successfully enrolled in the course! 🎉');
       
