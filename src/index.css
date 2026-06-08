@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --color-brand-red: #ef4444;
+  --color-brand-red-light: #f87171;
+  --color-brand-red-dark: #b91c1c;
+  --color-background: #f8fafc; /* Ultra clean slate-50 */
+}
+
+@layer base {
+  body {
+    @apply bg-[#f8fafc] text-gray-900 font-sans antialiased selection:bg-red-500/20 selection:text-red-900;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/80 backdrop-blur-2xl border border-white/60 shadow-[0_20px_50px_rgba(0,0,0,0.03)];
+  }
+  
+  .glass-panel-dark {
+    @apply bg-black/40 backdrop-blur-3xl border border-white/5; /* Kept for Live Classroom */
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 6s ease infinite;
+  }
+
+  @keyframes gradient-x {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+}
